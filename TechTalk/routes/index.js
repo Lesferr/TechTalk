@@ -1,3 +1,9 @@
+require('dotenv').config();
+
+const express = require('express');
+const app = express();
+
+app.use(express.json());
 var express = require('express');
 var router = express.Router();
 const mysql = require('mysql');

@@ -124,3 +124,46 @@ document.addEventListener('keydown', (e) => {
     setState(next);
   }
 });
+
+const sidebar = document.querySelector('#sidebar');
+const toggleBtn = document.querySelector('#menuToggle');
+
+const STORAGE_KEY = 'sidebar_state';
+
+/* ================= STATE ================= */
+
+const getState = () => {
+  return localStorage.getItem(STORAGE_KEY) || 'expanded';
+};
+
+const setState = (state) => {
+  localStorage.setItem(STORAGE_KEY, state);
+
+  const isCollapsed = state === 'collapsed';
+
+  sidebar.classList.toggle('collapsed', isCollapsed);
+  toggleBtn.setAttribute('aria-pressed', isCollapsed);
+};
+
+/* ================= INIT ================= */
+
+setState(getState());
+
+/* ================= TOGGLE ================= */
+
+toggleBtn.addEventListener('click', () => {
+  const current = getState();
+  const next = current === 'collapsed' ? 'expanded' : 'collapsed';
+
+  setState(next);
+});
+
+/* ================= KEYBOARD SUPPORT ================= */
+
+document.addEventListener('keydown', (e) => {
+  if (e.ctrlKey && e.key.toLowerCase() === 'b') {
+    const current = getState();
+    const next = current === 'collapsed' ? 'expanded' : 'collapsed';
+    setState(next);
+  }
+});

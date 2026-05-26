@@ -47,7 +47,29 @@
 .menu.active {
   transform: translateX(0);
 }
+.menu {
+  position: fixed;
+  top: 60px;
+  right: 0;
 
+  width: var(--sidebar-expanded);
+  height: calc(100vh - 60px);
+
+  background: #111;
+  color: #fff;
+
+  transition: width var(--transition);
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* COLLAPSED MODE */
+
+.menu.collapsed {
+  width: var(--sidebar-collapsed);
+}
 /* ================= TOPBAR BUTTON ================= */
 
 .line-container {
@@ -77,6 +99,42 @@
 
 .line-container.active .line-3 {
   transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.collapse-btn {
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+}
+
+/* smooth body adjustment */
+body {
+  transition: margin-right var(--transition);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+
+  padding: 14px;
+  cursor: pointer;
+
+  transition: background var(--transition);
+}
+
+.menu-item i {
+  min-width: 40px;
+  text-align: center;
+}
+
+/* hide text in collapsed mode */
+.menu.collapsed .menu-item span {
+  display: none;
+}
+
+/* hover effect */
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* ================= BODY LOCK ================= */

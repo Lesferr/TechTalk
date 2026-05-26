@@ -4,60 +4,86 @@ import {
   Text,
   View,
   TextInput,
-  Image,
-  Dimensions,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  Dimensions,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-export default function LoginScreen1() {
+const { width, height } = Dimensions.get('window');
+
+const COLORS = {
+  primary: '#ff6b81',
+  secondary: '#ff7979',
+  accent: '#eb4d4b',
+  button: '#f18973',
+  white: '#fff',
+  background: '#fafafa',
+  inputBg: '#dfe4ea',
+  text: '#444',
+};
+
+export default function LoginScreen() {
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <View style={styles.bigCircle}></View>
-        <View style={styles.smallCircle}></View>
-        <View style={styles.centerizedView}>
+        <View style={styles.bigCircle} />
+        <View style={styles.smallCircle} />
+
+        <View style={styles.centeredView}>
           <View style={styles.authBox}>
             <View style={styles.logoBox}>
               <Icon
-                color='#fff'
-                name='comments'
-                type='font-awesome'
+                name="comments"
+                type="font-awesome"
+                color={COLORS.white}
                 size={50}
               />
             </View>
-            <Text style={styles.loginTitleText}>Login</Text>
-            <View style={styles.hr}></View>
-            <View style={styles.inputBox}>
-              <Text style={styles.inputLabel}>Email</Text>
+
+            <Text style={styles.title}>Login</Text>
+
+            <View style={styles.divider} />
+
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Email</Text>
+
               <TextInput
                 style={styles.input}
-                autoCapitalize={false}
-                keyboardType='email-address'
-                textContentType='emailAddress'
+                autoCapitalize="none"
+                keyboardType="email-address"
+                textContentType="emailAddress"
+                placeholder="Enter your email"
               />
             </View>
-            <View style={styles.inputBox}>
-              <Text style={styles.inputLabel}>Password</Text>
+
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>Password</Text>
+
               <TextInput
                 style={styles.input}
-                autoCapitalize={false}
-                secureTextEntry={true}
-                textContentType='password'
+                autoCapitalize="none"
+                secureTextEntry
+                textContentType="password"
+                placeholder="Enter your password"
               />
             </View>
+
             <TouchableOpacity style={styles.loginButton}>
               <Text style={styles.loginButtonText}>Login</Text>
             </TouchableOpacity>
+
             <TouchableOpacity>
               <Text style={styles.registerText}>
-                Don't have an account? Register Now
+                Don&apos;t have an account? Register Now
               </Text>
             </TouchableOpacity>
+
             <TouchableOpacity>
-              <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+              <Text style={styles.forgotPasswordText}>
+                Forgot Password?
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -71,109 +97,129 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'relative',
   },
+
   bigCircle: {
-    width: Dimensions.get('window').height * 0.8,
-    height: Dimensions.get('window').height * 0.8,
-    backgroundColor: '#ff6b81',
-    borderRadius: 1000,
     position: 'absolute',
-    right: Dimensions.get('window').width * 0.25,
     top: -50,
+    right: width * 0.25,
+    width: height * 0.8,
+    height: height * 0.8,
+    borderRadius: 999,
+    backgroundColor: COLORS.primary,
   },
+
   smallCircle: {
-    width: Dimensions.get('window').height * 0.4,
-    height: Dimensions.get('window').height * 0.4,
-    backgroundColor: '#ff7979',
-    borderRadius: 1000,
     position: 'absolute',
-    bottom: Dimensions.get('window').width * -0.2,
-    right: Dimensions.get('window').width * -0.3,
+    bottom: width * -0.2,
+    right: width * -0.3,
+    width: height * 0.4,
+    height: height * 0.4,
+    borderRadius: 999,
+    backgroundColor: COLORS.secondary,
   },
-  centerizedView: {
+
+  centeredView: {
     width: '100%',
     top: '15%',
   },
+
   authBox: {
     width: '80%',
-    backgroundColor: '#fafafa',
-    borderRadius: 20,
     alignSelf: 'center',
-    paddingHorizontal: 14,
+    paddingHorizontal: 16,
     paddingBottom: 30,
+    backgroundColor: COLORS.background,
+    borderRadius: 20,
+
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    shadowRadius: 4,
     elevation: 5,
   },
+
   logoBox: {
+    top: -50,
     width: 100,
     height: 100,
-    backgroundColor: '#eb4d4b',
-    borderRadius: 1000,
+    marginBottom: -50,
     alignSelf: 'center',
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    top: -50,
-    marginBottom: -50,
+    borderRadius: 999,
+    backgroundColor: COLORS.accent,
+
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 1,
     },
     shadowOpacity: 0.2,
-    shadowRadius: 1.41,
+    shadowRadius: 2,
     elevation: 2,
   },
-  loginTitleText: {
+
+  title: {
+    marginTop: 10,
     fontSize: 26,
-    fontWeight: 'bold',
-    marginTop: 10,
+    fontWeight: '700',
+    color: COLORS.text,
   },
-  hr: {
+
+  divider: {
     width: '100%',
-    height: 0.5,
-    backgroundColor: '#444',
-    marginTop: 6,
+    height: 1,
+    marginTop: 8,
+    backgroundColor: COLORS.text,
+    opacity: 0.3,
   },
-  inputBox: {
-    marginTop: 10,
+
+  inputGroup: {
+    marginTop: 14,
   },
-  inputLabel: {
-    fontSize: 18,
+
+  label: {
     marginBottom: 6,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    backgroundColor: '#dfe4ea',
-    borderRadius: 4,
-    paddingHorizontal: 10,
-  },
-  loginButton: {
-    backgroundColor: '#f18973',
-    marginTop: 10,
-    paddingVertical: 10,
-    borderRadius: 4,
-  },
-  loginButtonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  registerText: {
-    textAlign: 'center',
-    marginTop: 20,
-    fontSize: 18,
-  },
-  forgotPasswordText: {
-    textAlign: 'center',
-    marginTop: 12,
     fontSize: 16,
+    fontWeight: '500',
+    color: COLORS.text,
+  },
+
+  input: {
+    height: 44,
+    paddingHorizontal: 12,
+    borderRadius: 6,
+    backgroundColor: COLORS.inputBg,
+  },
+
+  loginButton: {
+    marginTop: 20,
+    paddingVertical: 12,
+    borderRadius: 6,
+    backgroundColor: COLORS.button,
+  },
+
+  loginButtonText: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: '700',
+    color: COLORS.white,
+  },
+
+  registerText: {
+    marginTop: 20,
+    textAlign: 'center',
+    fontSize: 16,
+    color: COLORS.text,
+  },
+
+  forgotPasswordText: {
+    marginTop: 12,
+    textAlign: 'center',
+    fontSize: 15,
+    color: COLORS.text,
   },
 });
